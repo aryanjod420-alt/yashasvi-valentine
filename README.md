@@ -1,1 +1,187 @@
-# yashasvi-valentine
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yashasvi Valentine 💖</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body { width:100%; height:100%; font-family:'Comic Sans MS', cursive, sans-serif; overflow:hidden; }
+
+body { position: relative; text-align:center; transition: background 1s; }
+
+/* Buttons */
+button {
+    padding:25px 50px;
+    margin:20px;
+    border:none;
+    border-radius:25px;
+    font-size:26px;
+    cursor:pointer;
+    transition: transform 0.2s;
+    font-family:inherit;
+}
+button:hover { transform: scale(1.1); }
+.yes-btn { background:#ff99cc; color:white; }
+.no-btn { background:#ff4d4d; color:white; }
+
+/* Pages */
+.content {
+    width:100vw;
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    position:absolute;
+    top:0;
+    left:0;
+}
+.hidden { display:none; }
+
+/* Decorations: floating hearts and flowers */
+.decor {
+    position:absolute;
+    pointer-events:none;
+}
+.decor.heart { width:40px; animation: floatUp 10s linear infinite; }
+.decor.flower { width:40px; animation: floatDown 12s linear infinite; }
+
+@keyframes floatUp {
+    0% { transform: translateY(100vh) rotate(0deg); opacity:0; }
+    10% { opacity:1; }
+    100% { transform: translateY(-100px) rotate(360deg); opacity:0; }
+}
+
+@keyframes floatDown {
+    0% { transform: translateY(-50px) rotate(0deg); opacity:0; }
+    10% { opacity:1; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity:0; }
+}
+
+/* Final cute screen */
+.cute-container {
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    margin-top:20px;
+}
+.cute-container img { width:180px; margin:20px; border-radius:20px; box-shadow:0 5px 15px rgba(0,0,0,0.3); }
+
+.banner { font-size:64px; margin-bottom:20px; text-shadow:2px 2px 5px #ff3399; color:#fff; }
+
+.lovely-box {
+    background: rgba(255,255,255,0.3);
+    padding:20px 30px;
+    margin:10px;
+    border-radius:20px;
+    box-shadow: 2px 2px 15px rgba(0,0,0,0.3);
+    font-size:28px;
+    color:white;
+    text-shadow:1px 1px 3px #000;
+    max-width: 700px;
+}
+
+</style>
+</head>
+<body style="background: linear-gradient(135deg, #ffb3cc, #ff6699);">
+
+<audio id="bgMusic" loop autoplay>
+    <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Screen 1 -->
+<div id="screen1" class="content">
+    <h1>Hello Yashasvi! 💖</h1>
+    <h2>Do you want to start? 🌸</h2>
+    <button class="yes-btn" id="startYes">Yes 😍</button>
+    <button class="no-btn" id="startNo">No 😡</button>
+</div>
+
+<!-- Angry Screen 1 -->
+<div id="angry1" class="content hidden" style="background: linear-gradient(135deg, #990000, #cc0000); color:white;">
+    <h1>😡 You should click YES! 😡</h1>
+    <button class="yes-btn" id="angryYes1">Yes 😤</button>
+</div>
+
+<!-- Valentine Screen -->
+<div id="valentine" class="content hidden" style="background: linear-gradient(135deg, #ffb3cc, #ff99cc);">
+    <h1>Will you be my Valentine? 💌</h1>
+    <button class="yes-btn" id="valYes">Yes 😍</button>
+    <button class="no-btn" id="valNo">No 😢</button>
+</div>
+
+<!-- Angry Screen 2 -->
+<div id="angry2" class="content hidden" style="background: linear-gradient(135deg, #cc0000, #990000); color:white;">
+    <h1>😠 Tero chak YES gara! 😠</h1>
+    <button class="yes-btn" id="angryYes2">Yes 😤</button>
+</div>
+
+<!-- Final Cute Screen -->
+<div id="final" class="content hidden" style="background: linear-gradient(135deg, #ffb3d9, #ff99cc); flex-direction:column;">
+    <div class="banner">Yay! 😻💖</div>
+    <div class="cute-container">
+        <img src="https://placekitten.com/200/200" alt="Kitty">
+        <img src="https://images.unsplash.com/photo-1611080622541-5e46f97c026c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400" alt="Bouquet">
+    </div>
+    <div class="lovely-box">You make my heart flutter! 😘💞</div>
+    <div class="lovely-box">Every moment with you is magical ✨💕</div>
+    <div class="lovely-box">Be mine forever? 😻💖</div>
+    <div class="lovely-box">You are my sunshine 🌞❤️</div>
+    <div class="lovely-box">Life is sweeter with you 🍓💗</div>
+</div>
+
+<script>
+const screen1 = document.getElementById('screen1');
+const startYes = document.getElementById('startYes');
+const startNo = document.getElementById('startNo');
+
+const angry1 = document.getElementById('angry1');
+const angryYes1 = document.getElementById('angryYes1');
+
+const valentine = document.getElementById('valentine');
+const valYes = document.getElementById('valYes');
+const valNo = document.getElementById('valNo');
+
+const angry2 = document.getElementById('angry2');
+const angryYes2 = document.getElementById('angryYes2');
+
+const final = document.getElementById('final');
+
+startYes.addEventListener('click', ()=>{ screen1.classList.add('hidden'); valentine.classList.remove('hidden'); });
+startNo.addEventListener('click', ()=>{ screen1.classList.add('hidden'); angry1.classList.remove('hidden'); });
+angryYes1.addEventListener('click', ()=>{ angry1.classList.add('hidden'); valentine.classList.remove('hidden'); });
+
+valYes.addEventListener('click', ()=>{ valentine.classList.add('hidden'); final.classList.remove('hidden'); });
+valNo.addEventListener('click', ()=>{ valentine.classList.add('hidden'); angry2.classList.remove('hidden'); });
+angryYes2.addEventListener('click', ()=>{ angry2.classList.add('hidden'); final.classList.remove('hidden'); });
+
+// Floating hearts and flowers dynamically
+const heartImages = [
+    'https://cdn-icons-png.flaticon.com/512/833/833472.png',
+    'https://cdn-icons-png.flaticon.com/512/833/833477.png'
+];
+
+const flowerImages = [
+    'https://cdn-icons-png.flaticon.com/512/616/616408.png',
+    'https://cdn-icons-png.flaticon.com/512/616/616409.png'
+];
+
+function createDecor(type) {
+    const img = document.createElement('img');
+    if(type==='heart') img.src = heartImages[Math.floor(Math.random()*heartImages.length)];
+    else img.src = flowerImages[Math.floor(Math.random()*flowerImages.length)];
+    img.classList.add('decor', type);
+    img.style.left = Math.random()*100 + 'vw';
+    img.style.width = 30 + Math.random()*40 + 'px';
+    img.style.animationDuration = 5 + Math.random()*7 + 's';
+    document.body.appendChild(img);
+    setTimeout(()=>{ img.remove(); }, 12000);
+}
+
+// Add hearts & flowers continuously
+setInterval(()=>{ createDecor('heart'); createDecor('flower'); }, 400);
+
+</script>
+</body>
+</html>
